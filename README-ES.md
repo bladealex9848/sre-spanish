@@ -1,8 +1,18 @@
-# SmythOS - El Sistema Operativo para IA Agéntica
+# 🤖 SmythOS SRE - Sistema Operativo para IA Agéntica (Español)
 
-[![Página Principal](https://img.shields.io/badge/_Página_Principal-SmythOS-green?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJHSURBVHgBfVNNqBJRFL7jT1IYCeUqcRG+AsGVFLhIJIIHLVq93MRsSgpTWgRudaELBRctBDeB2qpdohsVdSOKok+eBC4UAiNSKX9440PtzYydM9yJqV4eOPfOvff8fd85Q8jFosElHo8fJhIJN71TgTJkj+CjWj6sVqu2KIo7VBCuUCg8VNj9E0iLSyQSuQmOx7VaLS4IAjqKsJ/jx3K5PKlUKg88Ho/p74ok58lkkkXDTCbziuO4rz9BMDvP898Ain04HL7fUVksFp+SyeS93+mn02kODKXHer3OYmbQTalUeoLveI8VbTabNQ36o1wuH0nOdrtdiw4iBTsYDALtdjuhwCsR2mw22e12e1YsFo/+gGC1WvW0MilALpd7Tg3UCo4kY4vFooOEV5SEq/r9/gqSD8GXASVQ6mXqJCgCiIjE7/e7Op3OWa/Xe03fNRhZo1arb7darRcMwxCDwXCN/EeAAw53m832FpJ+xyCIj8dKHA7HOygv7XQ6ryogCAoI4nq9FiViGKl7N7xer03uJe47t9t9KxwO97vdrlyiigYSG43GS7PZfJcG3OGi0+lOpVM0GrVB74+RRGB6Kw+Rz+e7HovF7sDVBC+CwSC2GNsogH4mcou0Wq0KymP0ej25BDKfz09SqdSzUCj00Wg03gfjc8xqMplwJ3D+wrLsgewvYySBQOAAhufxaDT6QIcHp0sEB348Hldms1k5m80eUh8NuUAkdqrV6iP8gRAKHbBTl8ulUfC196+UiSPpdPppPp9/sy/jL4yPfDIO4aFTAAAAAElFTkSuQmCC&logoWidth=14)](https://smythos.com)
-[![Discord](https://img.shields.io/badge/Discord-Únete_al_Chat-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/smythos)
-[![](https://img.shields.io/badge/📄_Licencia_Código-MIT-green)](https://github.com/SmythOS/sre/blob/main/LICENSE)
+[![Documentación Automática](https://github.com/bladealex9848/sre-spanish/actions/workflows/docs.yml/badge.svg)](https://github.com/bladealex9848/sre-spanish/actions/workflows/docs.yml)
+[![Repositorio Privado](https://img.shields.io/badge/Repositorio-Privado-red.svg)](https://github.com/bladealex9848/sre-spanish)
+[![Estado del Servicio](https://img.shields.io/badge/Estado-Operativo-green.svg)](http://localhost:8000/api/estado)
+[![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/bladealex9848/sre-spanish/releases)
+
+> **🔒 Repositorio Privado**: Configurado para uso seguro de credenciales y desarrollo empresarial
+
+## 📚 **DOCUMENTACIÓN AUTOMÁTICA**
+
+- 📖 **[Documentación Principal](https://bladealex9848.github.io/sre-spanish/)** - Generada automáticamente
+- 🔐 **[Configuración de Credenciales](CONFIGURACION-CREDENCIALES.md)** - Guía de seguridad
+- 🔍 **[Análisis del Proyecto](ANALISIS-PROYECTO.md)** - Documentación técnica completa
+- 🚀 **[API REST](api-example/server.js)** - Endpoints en español
 
 Todo lo que necesitas para construir, desplegar y gestionar agentes de IA inteligentes a escala. SmythOS está diseñado con una filosofía inspirada en los kernels de sistemas operativos, asegurando una base robusta y escalable para agentes de IA.
 
