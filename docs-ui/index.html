@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmythOS SRE Enhanced - Documentación Interactiva</title>
+    <meta name="description" content="Documentación interactiva completa con ejemplos en vivo para todos los endpoints de la API">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Prism.js para syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .code-block {
+            background: #2d3748;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .endpoint-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .endpoint-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .endpoint-card.get { border-left-color: #10b981; }
+        .endpoint-card.post { border-left-color: #3b82f6; }
+        .endpoint-card.put { border-left-color: #f59e0b; }
+        .endpoint-card.delete { border-left-color: #ef4444; }
+        
+        .method-badge.get { background: #10b981; }
+        .method-badge.post { background: #3b82f6; }
+        .method-badge.put { background: #f59e0b; }
+        .method-badge.delete { background: #ef4444; }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.online { background: #10b981; }
+        .status-dot.offline { background: #ef4444; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-robot text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">SmythOS SRE Enhanced</h1>
+                        <p class="text-blue-100">Documentación Interactiva de la API</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="status-dot online" id="apiStatus"></div>
+                        <span class="text-sm" id="apiStatusText">Verificando...</span>
+                    </div>
+                    <a href="https://github.com/bladealex9848/sre-spanish" target="_blank" 
+                       class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                        <i class="fab fa-github mr-2"></i>GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-8 overflow-x-auto">
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap active" 
+                        onclick="showTab('overview')">
+                    <i class="fas fa-home mr-2"></i>Resumen
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap" 
+                        onclick="showTab('endpoints')">
+                    <i class="fas fa-plug mr-2"></i>Endpoints
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap" 
+                        onclick="showTab('assistants')">
+                    <i class="fas fa-robot mr-2"></i>Asistentes
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap" 
+                        onclick="showTab('search')">
+                    <i class="fas fa-search mr-2"></i>Búsqueda
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap" 
+                        onclick="showTab('ocr')">
+                    <i class="fas fa-camera mr-2"></i>OCR
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap" 
+                        onclick="showTab('examples')">
+                    <i class="fas fa-code mr-2"></i>Ejemplos
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- API Status Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Estado de la API</h3>
+                        <div class="status-dot online" id="statusDot"></div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Estado:</span>
+                            <span class="font-medium text-green-600" id="systemStatus">Operativo</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Versión:</span>
+                            <span class="font-medium" id="systemVersion">1.0.0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Uptime:</span>
+                            <span class="font-medium" id="systemUptime">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Estadísticas</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-robot text-blue-500 mr-2"></i>
+                                <span class="text-gray-600">Asistentes</span>
+                            </div>
+                            <span class="font-bold text-2xl text-blue-600" id="assistantsCount">37</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-plug text-green-500 mr-2"></i>
+                                <span class="text-gray-600">Endpoints</span>
+                            </div>
+                            <span class="font-bold text-2xl text-green-600">25+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-brain text-purple-500 mr-2"></i>
+                                <span class="text-gray-600">Proveedores IA</span>
+                            </div>
+                            <span class="font-bold text-2xl text-purple-600" id="providersCount">9</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Acceso Rápido</h3>
+                    <div class="space-y-3">
+                        <a href="https://sre-api.alexanderoviedofadul.dev/docs" target="_blank"
+                           class="flex items-center justify-between p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-book text-blue-500 mr-3"></i>
+                                <span class="font-medium">Swagger UI</span>
+                            </div>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </a>
+                        <a href="https://sre-api.alexanderoviedofadul.dev/redoc" target="_blank"
+                           class="flex items-center justify-between p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-alt text-green-500 mr-3"></i>
+                                <span class="font-medium">ReDoc</span>
+                            </div>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </a>
+                        <button onclick="testAPI()" 
+                                class="w-full flex items-center justify-center p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
+                            <i class="fas fa-play text-purple-500 mr-3"></i>
+                            <span class="font-medium">Probar API</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-robot text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">37 Asistentes Especializados</h3>
+                    </div>
+                    <p class="text-gray-600">Asistentes de OpenAI especializados en derecho colombiano y múltiples categorías profesionales.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-camera text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">OCR Avanzado</h3>
+                    </div>
+                    <p class="text-gray-600">Tesseract + OpenAI Vision para extracción de texto de imágenes con alta precisión.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-search text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">Búsqueda Web Inteligente</h3>
+                    </div>
+                    <p class="text-gray-600">3 proveedores: Tavily, Google Custom Search y Exa para resultados completos.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-server text-yellow-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">Ollama Integrado</h3>
+                    </div>
+                    <p class="text-gray-600">8 modelos locales disponibles sin necesidad de API key externa.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-book text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">Documentación Completa</h3>
+                    </div>
+                    <p class="text-gray-600">Ejemplos en PHP, Python, React, Terminal y cURL para todos los endpoints.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-shield-alt text-indigo-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">API REST Segura</h3>
+                    </div>
+                    <p class="text-gray-600">HTTPS, CORS, rate limiting y headers de seguridad implementados.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Endpoints Tab -->
+        <div id="endpoints" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6">Endpoints Disponibles</h2>
+                <div id="endpointsList" class="space-y-4">
+                    <!-- Los endpoints se cargarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Assistants Tab -->
+        <div id="assistants" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6">Asistentes Especializados</h2>
+                <div id="assistantsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Los asistentes se cargarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Tab -->
+        <div id="search" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6">Búsqueda Web Inteligente</h2>
+                <div class="mb-6">
+                    <div class="flex space-x-4 mb-4">
+                        <input type="text" id="searchQuery" placeholder="Ingresa tu consulta de búsqueda..." 
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button onclick="performSearch()" 
+                                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-search mr-2"></i>Buscar
+                        </button>
+                    </div>
+                </div>
+                <div id="searchResults" class="space-y-4">
+                    <!-- Los resultados se mostrarán aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- OCR Tab -->
+        <div id="ocr" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6">OCR - Reconocimiento Óptico de Caracteres</h2>
+                <div class="mb-6">
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <input type="file" id="ocrFile" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+                        <button onclick="document.getElementById('ocrFile').click()" 
+                                class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                            <i class="fas fa-upload mr-2"></i>Seleccionar Imagen
+                        </button>
+                        <p class="text-gray-500 mt-2">Formatos soportados: JPG, PNG, GIF, BMP, TIFF, WEBP</p>
+                    </div>
+                </div>
+                <div id="ocrResults" class="space-y-4">
+                    <!-- Los resultados de OCR se mostrarán aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples Tab -->
+        <div id="examples" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6">Ejemplos de Código</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="codeExamples">
+                    <!-- Los ejemplos se cargarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-2">&copy; 2025 SmythOS SRE Enhanced - Desarrollado por Alexander Oviedo Fadul</p>
+            <p class="text-gray-400">API Base: <a href="https://sre-api.alexanderoviedofadul.dev" class="text-blue-400 hover:text-blue-300">https://sre-api.alexanderoviedofadul.dev</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# SmythOS SRE Monorepo - Cursor AI Rules
+
+## Project Overview
+
+This is the **SmythOS SRE (Smyth Runtime Environment)** monorepo - an advanced agentic AI platform that provides a comprehensive runtime environment for building and managing AI agents. The system includes LLM management, vector databases, storage, security, and agent orchestration capabilities.
+
+## Monorepo Structure & Package Manager
+
+-   **Package Manager**: PNPM (required) - use `pnpm` commands for all package management
+-   **Workspace Structure**:
+    -   `packages/core` - Main runtime library (@smythos/sre)
+    -   `packages/sdk` - Developer SDK (@smythos/sdk)
+    -   `packages/cli` - Command line interface
+    -   `examples/` - Example implementations and demos
+
+## Naming Conventions & Standards
+
+### File Extensions
+
+-   `.service.ts` - Top-level subsystem services
+-   `.class.ts` - Classes and connectors/managers
+-   `.utils.ts` - Utility function collections
+-   `.helper.ts` - Task-specific helper objects
+-   `.handler.ts` - Event handlers
+-   `.mw.ts` - Middleware
+
+## Critical Reminders
+
+⚠️ **ALWAYS USE PNPM** - This is a pnpm workspace. Never suggest npm or yarn commands.
+⚠️ **MONOREPO STRUCTURE** - Always consider workspace context when suggesting changes or running commands.
+
+

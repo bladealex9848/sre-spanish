@@ -1,0 +1,39 @@
+# IO Subsystem
+
+The IO Subsystem is SRE's gateway to the outside world. It provides a set of unified, connector-based services for all input and output operations. This ensures that the core agent logic remains decoupled from the specific implementation details of any external data source or sink.
+
+All services within the IO subsystem are accessed via the `SRE.IO` namespace.
+
+## Core IO Services
+
+### Storage
+
+The Storage service provides a generic interface for block storage operations (reading, writing, and listing files). It is the primary way agents persist and retrieve data like documents, logs, and other artifacts.
+
+-   **Interface**: `IStorageConnector`
+-   **Service Access**: `SRE.IO.Storage`
+-   **Common Connectors**: `LocalStorageConnector`, `S3StorageConnector`
+
+### VectorDB
+
+The VectorDB service provides an interface for storing and querying vector embeddings, which is essential for semantic search, RAG (Retrieval-Augmented Generation), and long-term memory for agents.
+
+-   **Interface**: `IVectorDBConnector`
+-   **Service Access**: `SRE.IO.VectorDB`
+-   **Common Connectors**: `PineconeConnector`, `ChromaConnector`, `RAMVecConnector` (for in-memory operations)
+
+### Log
+
+The Log service provides a structured logging interface for agents and the SRE itself. It allows for consistent log formatting and routing to various destinations.
+
+-   **Interface**: `ILogConnector`
+-   **Service Access**: `SRE.IO.Log`
+-   **Common Connectors**: `ConsoleLogConnector`
+
+### NKV (Named Key-Value)
+
+The NKV service provides a simple interface for a namespaced key-value store, suitable for metadata, session information, or other non-hierarchical data.
+
+-   **Interface**: `INkvConnector`
+-   **Service Access**: `SRE.IO.NKV`
+-   **Common Connectors**: `RAMKVConnector`, `RedisNkvConnector`

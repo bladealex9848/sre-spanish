@@ -1,0 +1,14 @@
+{
+    "gemma-3n-e4b": {
+        "provider": "OpenAI",
+        "modelId": "google/gemma-3n-e4b",
+        "baseURL": "http://localhost:1234/v1",
+
+        "tokens": 4096,
+        "completionTokens": 1024,
+
+        "enabled": true,
+        "features": ["text", "tools"],
+        "credentials": "vault"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        //"noImplicitAny": true,
+        "strict": false,
+        "sourceMap": true,
+        "preserveSymlinks": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "typeRoots": ["./node_modules/@types"],
+        "isolatedModules": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "jsx": "react-jsx"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,3 @@
+tests/vault.json
+**/*.vault.json
+**/vault.json

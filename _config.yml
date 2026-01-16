@@ -1,0 +1,77 @@
+# SmythOS SRE Enhanced - Configuración de GitHub Pages
+title: "SmythOS SRE Enhanced"
+description: "Sistema Operativo para IA Agéntica - Plataforma completa con 37 asistentes especializados, OCR, búsqueda web inteligente y documentación interactiva"
+author: "Alexander Oviedo Fadul"
+email: "alexander.oviedo.fadul@gmail.com"
+url: "https://bladealex9848.github.io"
+baseurl: "/sre-spanish"
+
+# GitHub
+github_username: bladealex9848
+repository: "bladealex9848/sre-spanish"
+
+# API
+api_base_url: "https://sre-api.alexanderoviedofadul.dev"
+swagger_ui_url: "https://sre-api.alexanderoviedofadul.dev/docs"
+redoc_url: "https://sre-api.alexanderoviedofadul.dev/redoc"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - api-example/
+  - uploads/
+  - logs/
+  - .env
+  - package*.json
+  - "*.log"
+
+# Include files
+include:
+  - _pages
+  - assets
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Alexander Oviedo Fadul"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "page"
+
+# SEO
+lang: es
+locale: es_CO
+
+# Social
+social:
+  name: Alexander Oviedo Fadul
+  links:
+    - https://github.com/bladealex9848
+    - https://linkedin.com/in/alexander-oviedo-fadul
+
+# Analytics (opcional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Timezone
+timezone: America/Bogota

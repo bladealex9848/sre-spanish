@@ -1,0 +1,69 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in SmythOS SRE
+title: '[Bug]: '
+labels: ['bug', 'needs-triage']
+assignees: []
+
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for reporting a bug! Please search existing issues first to avoid duplicates.
+
+    - type: textarea
+      id: bug-description
+      attributes:
+          label: 🐛 What happened?
+          description: Describe the bug and what you expected to happen
+          placeholder: |
+              Bug: Agent fails to initialize with custom model
+              Expected: Agent should initialize successfully
+              Actual: Throws "Model not found" error
+      validations:
+          required: true
+
+    - type: textarea
+      id: reproduction-steps
+      attributes:
+          label: 🔄 How to reproduce
+          description: Steps to reproduce the behavior
+          placeholder: |
+              1. Create new Agent with custom model
+              2. Call agent.prompt()
+              3. See error
+      validations:
+          required: true
+
+    - type: textarea
+      id: code-sample
+      attributes:
+          label: 💻 Code sample
+          description: Minimal code that reproduces the issue
+          render: typescript
+          placeholder: |
+              const agent = new Agent({
+                model: 'custom-model'
+              });
+
+    - type: textarea
+      id: environment
+      attributes:
+          label: 🖥️ Environment
+          description: Your environment details
+          placeholder: |
+              OS: macOS 14.0
+              Node: 18.17.0
+              SmythOS: 1.2.3
+              Package: @smythos/sdk
+      validations:
+          required: true
+
+    - type: checkboxes
+      id: checklist
+      attributes:
+          label: ✅ Checklist
+          options:
+              - label: Searched existing issues
+                required: true
+              - label: Provided reproduction steps
+                required: true

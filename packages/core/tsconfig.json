@@ -1,0 +1,69 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "preserveSymlinks": true,
+        "baseUrl": "./src",
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        //"noImplicitAny": false,
+        //"ignoreDeprecations": "5.0",
+        //"suppressImplicitAnyIndexErrors": true,
+        "paths": {
+            //"@sre/index": ["index.ts"],
+            "@sre/config": ["config.ts"],
+            "@sre/constants": ["constants.ts"],
+            "@sre/types/*": ["types/*"],
+
+            "@sre/Core/*": ["Core/*"],
+
+            "pkce-challenge": ["./node_modules/pkce-challenge/dist/index.node.cjs"],
+
+            "@sre/sdk": ["sdk/sdk.index.ts"],
+            "@sre/sdk/*": ["sdk/*"],
+
+            "@sre/utils/*": ["utils/*"],
+            "@sre/utils": ["utils/index"],
+
+            "@sre/helpers/*": ["helpers/*"],
+            "@sre/helpers": ["helpers/index"],
+
+            "@sre/services/*": ["services/*"],
+            "@sre/services": ["services/index"],
+
+            "@sre/IO/*": ["subsystems/IO/*"],
+            "@sre/IO": ["subsystems/IO/index"],
+
+            "@sre/ComputeManager/*": ["subsystems/ComputeManager/*"],
+            "@sre/ComputeManager": ["subsystems/ComputeManager/index"],
+
+            "@sre/AgentManager/*": ["subsystems/AgentManager/*"],
+            "@sre/AgentManager": ["subsystems/AgentManager/index"],
+
+            "@sre/LLMManager/*": ["subsystems/LLMManager/*"],
+            "@sre/LLMManager": ["subsystems/LLMManager/index"],
+
+            "@sre/MemoryManager/*": ["subsystems/MemoryManager/*"],
+            "@sre/MemoryManager": ["subsystems/MemoryManager/index"],
+
+            "@sre/Security/*": ["subsystems/Security/*"],
+            "@sre/Security": ["subsystems/Security/index"],
+
+            "@sre/Components/*": ["Components/*"],
+            "@sre/Components": ["Components/index"]
+        },
+        //"types": ["node"],
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "typeRoots": ["./node_modules/@types"]
+    },
+    "include": ["src/**/*.ts", "tests/**/*.ts"],
+
+    "exclude": ["node_modules"]
+}
